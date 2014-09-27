@@ -45,18 +45,21 @@ My PHP skills are non existent.
 So to do what I wanted to do, I actually had to look up a PHP hello world.
 And then finally the [`Print()`](http://php.net/manual/en/function.print.php) function.
 
-Above the line printing the error I simply added the following code:
+I simply added a Print() statement above the `coding_exception()` line so I could see the path causing the issue.
 ```php
-$andrewsPath = $this->path;
-Print "andrewsPath is $andrewsPath";
+if (!make_writable_directory($this->path, false)) {
+                $andrewsPath = $this->path;
+                Print "andrewsPath is $andrewsPath";
+                throw new coding_exception('File store path does not exist and can not be created. andrewsPath: $andrewsPath');
+            }
 ```
 Then upon refreshing the moodle page I got a message stating the path that was failing the writable checks.
 `srv/moodledata/cache/cachestore_file/default_application/core_config/`
 
 A simple `chown -R www-data /srv/moodledata` fixed everything.
 
-I had previously checked /srv/moodledata and several further down directories to find the permissions were as expected, readable and writable by www-data.  
-However three files in `srv/moodledata/cache/cachestore_file/default_application/core_config/` had changed to root:root with timestamps suggesting they happened during the upgrade.
+I had previously checked `/srv/moodledata` and several further down directories to find the permissions were as expected, readable and writable by www-data.  
+However I missed three files in `srv/moodledata/cache/cachestore_file/default_application/core_config/` which had changed to root:root with timestamps suggesting it happened during the upgrade.
 
 ##Lesson
 Make backups, you idiot.
