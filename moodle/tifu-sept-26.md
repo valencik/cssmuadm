@@ -31,7 +31,7 @@ Unfortunately, my googlefu returns very little on this error.
 I created a forum post on moodle.org:
 https://moodle.org/mod/forum/discuss.php?d=270902
 
-Thankfully the error message was unique in the database.
+Thankfully the error message was unique in the codebase.
 ```bash
 root@moodle:/var/www/moodle# grep -inr "File store path does not exist and can not be created." *
 cache/stores/file/lib.php:642:                throw new coding_exception('File store path does not exist and can not be created.');
@@ -40,16 +40,20 @@ I now had the [exact line of code that threw the error](https://github.com/moodl
 Time to work backwards.
 
 So, `make_writable_directory()` is failing, after `is_writable()` fails, when something calls `ensure_path_exists()`.  
-Admittedly I did a decent amount of poking around and reading the source before fixing the issue.  
+Admittedly, I did a decent amount of poking around and reading the source before fixing the issue.  
+I can't state enough how useful grepping for function calls and declarations is.  
+And thankfully, the moodle code is actually well commented.
+
+##Solution
 My PHP skills are non existent. 
 So to do what I wanted to do, I actually had to look up a PHP hello world.  
 And then finally the [`Print()`](http://php.net/manual/en/function.print.php) function.  
 
-I simply added a `Print()` statement above the `coding_exception()` line so I could see the path causing the issue.
+I simply added a `print` statement above the `coding_exception()` line so I could see the path causing the issue.
 ```php
 if (!make_writable_directory($this->path, false)) {
                 $andrewsPath = $this->path;
-                Print "andrewsPath is $andrewsPath";
+                print "andrewsPath is $andrewsPath";
                 throw new coding_exception('File store path does not exist and can not be created. andrewsPath: $andrewsPath');
             }
 ```
