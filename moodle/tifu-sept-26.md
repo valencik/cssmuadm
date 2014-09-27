@@ -9,7 +9,7 @@ Not making a snapshot of the VM.
 Seriously...  
 
 ##The install
-Moodle 2.7.1 was installed on Ubuntu 14.04 via the [00-Install-Moodle.sh](../00-Install-Moodle.sh) script.  
+Moodle 2.7.1 was installed on Ubuntu 14.04 via the [00-Install-Moodle.sh](00-Install-Moodle.sh) script.  
 (Namely, /var/www/moodle was produced by a shallow git clone from `MOODLE_27_STABLE`)  
 No 3rd party plugins were installed, and no really exotic configurations were made.  
 
