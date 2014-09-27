@@ -1,5 +1,5 @@
-Failed Upgrade
-==============
+A Failed Moodle Upgrade
+=======================
 
 > September 26th 2014
 
@@ -9,7 +9,7 @@ Not making a snapshot of the VM.
 Seriously...  
 
 ##The install
-Moodle 2.7.1 was installed on Ubuntu 14.04 via the 00-Install-Moodle.sh script.  
+Moodle 2.7.1 was installed on Ubuntu 14.04 via the [00-Install-Moodle.sh](../00-Install-Moodle.sh) script.  
 (Namely, /var/www/moodle was produced by a shallow git clone from `MOODLE_27_STABLE`)  
 No 3rd party plugins were installed, and no really exotic configurations were made.  
 
@@ -42,10 +42,10 @@ Time to work backwards.
 So, `make_writable_directory()` is failing, after `is_writable()` fails, when something calls `ensure_path_exists()`.  
 Admittedly I did a decent amount of poking around and reading the source before fixing the issue.  
 My PHP skills are non existent. 
-So to do what I wanted to do, I actually had to look up a PHP hello world.
-And then finally the [`Print()`](http://php.net/manual/en/function.print.php) function.
+So to do what I wanted to do, I actually had to look up a PHP hello world.  
+And then finally the [`Print()`](http://php.net/manual/en/function.print.php) function.  
 
-I simply added a Print() statement above the `coding_exception()` line so I could see the path causing the issue.
+I simply added a `Print()` statement above the `coding_exception()` line so I could see the path causing the issue.
 ```php
 if (!make_writable_directory($this->path, false)) {
                 $andrewsPath = $this->path;
@@ -62,5 +62,5 @@ I had previously checked `/srv/moodledata` and several further down directories 
 However I missed three files in `srv/moodledata/cache/cachestore_file/default_application/core_config/` which had changed to root:root with timestamps suggesting it happened during the upgrade.
 
 ##Lesson
-Make backups, you idiot.
+Make backups, you idiot.  
 Take snapshots, you idiot.
