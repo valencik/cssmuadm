@@ -65,8 +65,8 @@ for i in $(seq -w $minAccount $maxAccount); do
     user=$courseShortName$i
 
     #Protect user folders
-    chmod 570 $path/$user
-    chown -R www-data:$user $path/$user
+    chmod -R 750 $path/$user
+    chown -R $user:www-data $path/$user
 
     #Protect htaccess from user changes
     chmod 550 $path/$user/public_html/submissions/.htaccess
