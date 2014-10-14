@@ -39,6 +39,6 @@ then
     echo "CSC355 sudoers exception exists"
 else
     echo "Creating sudoers exception!"
-    echo "Cmnd_Alias  LOCKDOWN355=$path/lockdown/lockdown.sh, $path/lockdown/unlock.sh, $path/lockdown/lock.sh" >> /etc/sudoers.d/csc355.conf
-    echo "csc35500 ALL = (root) NOPASSWD: LOCKDOWN355" >> /etc/sudoers.d/csc355.conf
+    echo "Cmnd_Alias  LOCKDOWN355=$path/lockdown/lockdown.sh, $path/lockdown/unlock.sh, $path/lockdown/lock.sh" >> /etc/sudoers.d/csc355
+    echo "csc35500 ALL = (root) NOPASSWD: LOCKDOWN355" >> /etc/sudoers.d/csc355
 fi
