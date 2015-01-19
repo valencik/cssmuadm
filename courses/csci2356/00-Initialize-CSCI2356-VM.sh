@@ -25,10 +25,18 @@ then
 fi
 
 #Install NodeJS
-curl -sL https://deb.nodesource.com/setup | sudo bash -
-apt-get --assume-yes --quiet install nodejs
-apt-get --assume-yes --quiet install build-essential
+if [ ! -f /usr/bin/nodejs ];
+then
+  curl -sL https://deb.nodesource.com/setup | sudo bash -
+  apt-get --assume-yes --quiet install nodejs
+  apt-get --assume-yes --quiet install build-essential
+fi
 
 #Install Mongodb
-#add PPA
-apt-get --assume-yes --quiet install mongodb
+if [ ! -f /usr/bin/mongod ];
+then
+  sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
+  echo 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' | sudo tee /etc/apt/sources.list.d/mongodb.list
+  sudo apt-get update
+  apt-get --assume-yes --quiet install mongodb-org
+fi
