@@ -1,6 +1,15 @@
 #!/bin/bash
 #This script installs required software for hosting the CSCI2356 course.
 
+#Set hostname
+NEW_HOSTNAME=cs2356
+hostnamectl set-hostname $NEW_HOSTNAME
+sed -i 's/127.0.1.1.*/127.0.1.1\t'"$NEW_HOSTNAME"'/g' /etc/hosts
+
+#Make sure loopback device has IP
+ip addr add 127.0.0.1 dev lo
+
+#Get and apply any updates
 apt-get update
 apt-get --assume-yes upgrade
 
