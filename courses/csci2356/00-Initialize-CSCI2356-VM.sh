@@ -28,9 +28,13 @@ then
   #Enable necessary apache2 mods for per-user directories
   a2enmod userdir 
   
-  #Make sure loopback device has IP
-  ip addr add 127.0.0.1 dev lo
-  
+  #User directories are in /home/course/csc356/
+  cp /etc/apache2/mods-enabled/userdir.conf /etc/apache2/mods-enabled/userdir.conf_old
+  sed -i '/<Directory \/home\/\*\/public_html>/s/home/home\/course\/csc356/' \
+      /etc/apache2/mods-enabled/userdir.conf
+  sed -i '/<Directory \/home\/course\/csc356\/\*\/public_html>/,/<\/Directory>/s/SymLinksIfOwnerMatch/FollowSymLinks/' \
+      /etc/apache2/mods-enabled/userdir.conf
+  service apache2 restart
 fi
 
 #Install NodeJS
