@@ -41,7 +41,7 @@ fi
 if [ ! -f /usr/bin/nodejs ];
 then
   curl -sL https://deb.nodesource.com/setup | sudo bash -
-  apt-get --assume-yes --quiet install nodejs
+  apt-get --assume-yes --quiet install nodejs npm
   apt-get --assume-yes --quiet install build-essential
 fi
 
