@@ -1,5 +1,5 @@
 #!/bin/bash
-#This script is testing installationa and setup on Ubuntu 14
+#This script is testing installation and setup on Ubuntu 14
 
 #Set hostname
 NEW_HOSTNAME=paulR
