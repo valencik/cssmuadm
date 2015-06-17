@@ -110,7 +110,7 @@ def main(argv):
     hostname = args.hostname
     # hostname = '192.168.0.46'
     config_file_name = args.config
-
+    quiet, create, update, delete = False, True, False, False
     # Add three booleans and test for create, update and delete, if they aren't there default to false
     if args.quiet is None:
         quiet = False
@@ -118,9 +118,11 @@ def main(argv):
         quiet = True
 
     if args.create is None:
-        create = False
+        create = True
     elif args.create is 't' or args.create is 'true':
         create = True
+    elif args.create is 'f' or args.create is 'false':
+        create = False
 
     if args.update is None:
         update = False
