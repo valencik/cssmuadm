@@ -1,0 +1,53 @@
+# --- !Sample yaml file for testing
+credentials:
+  username:  'root'
+  password:  'admin'
+# Run this as a test, there should be one user named testUser2
+users:
+    to_create:
+      0:
+        bsdusr_username: "testUser1"
+        bsdusr_password: "password"
+        bsdusr_full_name: "User"
+        bsdusr_creategroup: true
+        bsdusr_uid: 1111
+        bsdusr_group: 1
+        bsdusr_mode: ""
+        bsdusr_shell: "/bin/sh"
+        bsdusr_password_disabled: false
+        bsdusr_locked: false
+        bsdusr_sudo: false
+        bsdusr_sshpubkey: ""
+      1:
+        bsdusr_username: "testUser2"
+        bsdusr_password: "password"
+        bsdusr_full_name: "User2"
+        bsdusr_creategroup: true
+        bsdusr_uid: 1112
+        bsdusr_group: 1
+        bsdusr_mode: ""
+        bsdusr_shell: "/bin/sh"
+        bsdusr_password_disabled: false
+        bsdusr_locked: false
+        bsdusr_sudo: false
+        bsdusr_sshpubkey: ""
+    to_update:
+      0:
+        id:  28
+        bsdusr_username: "testUser1"
+        bsdusr_password: "password"
+        bsdusr_full_name: "User"
+        bsdusr_creategroup: true
+        bsdusr_uid: 1111
+        bsdusr_group: 1
+        bsdusr_mode: ""
+        bsdusr_shell: "/bin/sh"
+        bsdusr_password_disabled: false
+        bsdusr_locked: false
+        bsdusr_sudo: false
+        bsdusr_sshpubkey: ""
+    to_delete:
+      0:
+        id:  28
+
+

@@ -1,0 +1,35 @@
+# --- !Sample yaml file for testing
+credentials:
+  username:  'root'
+  password:  'admin'
+# Can't change the id after the group has been created. Can change the bsdgrp_gid
+# Run this as a test, there should be 1 group with an id = 2002 named NewGroupName2
+groups:
+    to_create:
+      0:
+        id: 2001
+        bsdgrp_gid:  2001
+        bsdgrp_group: "TestGroup1"
+        bsdgrp_sudo: false
+      1:
+        id: 2002
+        bsdgrp_gid:  2002
+        bsdgrp_group: "TestGroup2"
+        bsdgrp_sudo: false
+    to_update:
+    # id = current id, bsdgrp_gid = new id
+      0:
+        id:  2001
+        bsdgrp_gid:  3001
+        bsdgrp_group: "NewGroupName1"
+        bsdgrp_sudo: true
+      1:
+        id: 2002
+        bsdgrp_gid:  3002
+        bsdgrp_group: "NewGroupName2"
+        bsdgrp_sudo: false
+    to_delete:
+      0:
+        id:  2001
+
+
