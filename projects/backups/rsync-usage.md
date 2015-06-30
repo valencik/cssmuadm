@@ -1,5 +1,6 @@
 # Rsync Manager
 ### Usage  
+##### Needs to be updated :)
 ##### Default Manager with creation permissions:
 ```sh
 $ python3 rsync_manager.py -H 192.168.0.46 -co config.yml 
