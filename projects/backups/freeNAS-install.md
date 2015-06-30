@@ -1,19 +1,21 @@
 General Notes
 =============
 
-Grab the latest FreeNAS iso from
+Grab the latest FreeNAS iso from [http://www.freenas.org](http://www.freenas.org/download-freenas-release.html)
 
-Format and dd copy to any available USB
-Format a reliable 8gb USB key as freespace
+Copy the freeNAS installer to a USB flash drive.
 
-Use only USB2 ports for usb keys
+Instructions for Mac OS X:
+
+```bash
+hdiutil convert FreeNAS-9.3-STABLE-201505130355.iso  -format UDRW -o freenas.img
+diskutil unmountDisk /dev/diskX
+dd if=freenas.img of=/dev/diskX bs=1m
+```
 
 
 Issues
 ======
 
-Drives running hot as hell still. (above 60C)
+- Can only use USB2 ports for booting
 
-Boot the system into Kali or ubuntu and see if the drives continue to run high.
-
-Get new fans and cables.

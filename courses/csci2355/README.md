@@ -35,4 +35,6 @@ This is recursively set on the whole home directory with two exceptions:
 - ~/htpasswd has file permissions 550
 - ~/public_html/submissions/.htaccess has file permissions 550
 
-
+# TODO
+- create the 01..12 directories in public_html for student work directories
+- php script needs to include database configuration, make user root dir called **dbinclude**
