@@ -1,0 +1,5 @@
+credentials:
+  password: admin
+  username: root
+rsync_tasks:
+  to_create: {}

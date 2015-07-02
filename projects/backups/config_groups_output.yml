@@ -1,0 +1,15 @@
+credentials:
+  password: admin
+  username: root
+groups:
+  to_create:
+    0:
+      bsdgrp_builtin: false
+      bsdgrp_gid: 2001
+      bsdgrp_group: TestGroup1
+      bsdgrp_sudo: false
+    1:
+      bsdgrp_builtin: false
+      bsdgrp_gid: 2002
+      bsdgrp_group: TestGroup2
+      bsdgrp_sudo: false

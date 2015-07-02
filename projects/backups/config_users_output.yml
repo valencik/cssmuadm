@@ -1,0 +1,37 @@
+credentials:
+  password: admin
+  username: root
+users:
+  to_create:
+    0:
+      bsdusr_builtin: false
+      bsdusr_email: ''
+      bsdusr_full_name: User
+      bsdusr_group: 0
+      bsdusr_home: /nonexistent
+      bsdusr_locked: false
+      bsdusr_microsoft_account: false
+      bsdusr_password_disabled: false
+      bsdusr_shell: /bin/sh
+      bsdusr_smbhash: 'testUser1:1111:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX:8846F7EAEE8FB117AD06BDD830B7586C:[U          ]:LCT-559566C8:'
+      bsdusr_sshpubkey: ''
+      bsdusr_sudo: false
+      bsdusr_uid: 1111
+      bsdusr_unixhash: $6$W2PAwIJBvjNs7CdF$d6dWqhxvYiC69FWoe/X6l/7VLk0zdLYU/sMTTG2GyWy9lxN8r99L8OMb/Z9cJ1D2ikB3hupTSPMjUC.5l9XjH.
+      bsdusr_username: testUser1
+    1:
+      bsdusr_builtin: false
+      bsdusr_email: ''
+      bsdusr_full_name: User2
+      bsdusr_group: 0
+      bsdusr_home: /nonexistent
+      bsdusr_locked: false
+      bsdusr_microsoft_account: false
+      bsdusr_password_disabled: false
+      bsdusr_shell: /bin/sh
+      bsdusr_smbhash: 'testUser2:1112:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX:8846F7EAEE8FB117AD06BDD830B7586C:[U          ]:LCT-559566D0:'
+      bsdusr_sshpubkey: ''
+      bsdusr_sudo: false
+      bsdusr_uid: 1112
+      bsdusr_unixhash: $6$gt6wA1rvIY3SkUqd$hQ/tU9rpLwdyCaAB24i56BvFTPg92/oCsVV.ZUABj3fTOfmZb0fWOo4ZfoE.zJ54eWVzJOcFay1Bpi188SlOW.
+      bsdusr_username: testUser2
