@@ -90,6 +90,19 @@ class FreeNASManager(object):
 
         return deleted
 
+    def dump_tasks(self, config_file_name_output):
+        outputFile = open(config_file_name_output, 'w')
+        tasks = self.get_all_tasks(self.ask_for_credentials())
+        for task in tasks:
+            outputFile.write(str(task))
+        # print(self.get_all_tasks(self.ask_for_credentials()))
+
+    def dump_users(self, config_file_name_output):
+        print(self.get_all_users(self.ask_for_credentials()))
+
+    def dump_groups(self, config_file_name_output):
+        print(self.get_all_groups(self.ask_for_credentials()))
+
     def process_config_file(self):
         if not self._quiet:
             print("Starting to process", self._config_file_name)
@@ -146,6 +159,13 @@ class FreeNASManager(object):
 
         if not self._quiet:
             print("Finished processing", self._config_file_name)
+
+    def ask_for_credentials(self):
+        credentials = {}
+        username = input("Enter username [root]: ")
+        credentials['username'] = 'root' if username == '' else username
+        credentials['password'] = getpass.getpass('Enter password for '+credentials['username']+':')  
+        return credentials 
 
     def get_credentials(self):
         if not self._quiet:
@@ -307,7 +327,16 @@ def main(argv):
     parser.add_argument('-dat','--delete_all_tasks', required=False, type=str)
     parser.add_argument('-dau','--delete_all_users', required=False, type=str)
     parser.add_argument('-dag','--delete_all_groups', required=False, type=str)
+    parser.add_argument('-diat','--display_tasks', required=False, type=str)
+    parser.add_argument('-diau','--display_users', required=False, type=str)
     parser.add_argument('-diag','--display_groups', required=False, type=str)
+    parser.add_argument('-gat','--get_all_tasks', required=False, type=str)
+    parser.add_argument('-gau','--get_all_users', required=False, type=str)
+    parser.add_argument('-gag','--get_all_groups', required=False, type=str)
+    parser.add_argument('-gaubi','--get_all_users_built_in', required=False, type=str)
+    parser.add_argument('-gagbi','--get_all_groups_built_in', required=False, type=str)
+    parser.add_argument('-user','--username', required=False, type=str)
+    parser.add_argument('-pass','--password', required=False, type=str)
 
     args = parser.parse_args(sys.argv[1:])
 
@@ -348,14 +377,26 @@ def main(argv):
             manager.delete_all_groups(manager.get_credentials()) 
         if args.delete_all_users is 't':
             manager.delete_all_users(manager.get_credentials()) 
-
-    elif args.display_groups:
+    elif args.display_tasks or args.display_users or args.display_groups:
+        if args.display_tasks is 't':
+            print("Rsync Tasks:\n",manager.get_all_tasks(manager.get_credentials()))    
+        if args.display_users is 't':
+            print("Users:\n",manager.get_all_non_builtin_users(manager.get_credentials()))
         if args.display_groups is 't':
-            print(manager.get_all_non_builtin_groups(manager.get_credentials()))
+            print("Groups:\n",manager.get_all_non_builtin_groups(manager.get_credentials()))
+    elif args.get_all_tasks or args.get_all_users or args.get_all_groups:
+        if args.config is not None:
+            if args.get_all_tasks is 't':
+                manager.dump_tasks(args.config)
+            if args.get_all_users is 't':
+                manager.dump_users(args.config)
+            if args.get_all_groups is 't':
+                manager.dump_groups(args.config)
     else:
         manager.display_configuration()
-        if manager.determine_type():
-            manager.process_config_file()
+        if create or update or delete:
+            if manager.determine_type():
+                manager.process_config_file()
 
 if __name__ == '__main__':
     main(sys.argv[1:])
