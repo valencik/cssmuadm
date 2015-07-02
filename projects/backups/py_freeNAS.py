@@ -12,7 +12,8 @@ class Type(Enum):
     rsync_tasks = 1
     users = 2
     groups = 3
-    task = 4
+    time_machine = 4
+    task = 5
 
 class FreeNASManager(object):
 
@@ -29,6 +30,7 @@ class FreeNASManager(object):
         self._rsync_address = '/tasks/rsync'
         self._user_address = '/account/users'
         self._group_address = '/account/groups'
+        self._time_machine_address = '/sharing/afp'
         self._base_address = 'http://%s/api/v1.0' % hostname
 
     def display_configuration(self):
@@ -40,6 +42,7 @@ class FreeNASManager(object):
         if not self._quiet:
             print("Creating",self._type.name,"...")
 
+        print('%s/' % self._base_address)
         created = requests.post(
             '%s/' % self._base_address,
             auth=(credentials['username'], credentials['password']),
@@ -90,18 +93,56 @@ class FreeNASManager(object):
 
         return deleted
 
+    def dump(self, config_file_name_output, credentials, listValues, typeName):
+        if os.path.isfile(config_file_name_output):
+            answer = input(config_file_name_output+" already exists, do you want to overwrite y/[n]:")
+        else:
+            answer = 'y'
+        if answer is 'y':
+            outputFile = open(config_file_name_output, 'w')
+            outputFile.truncate()
+            mainList = {}
+
+            # Recreate the proper structure 
+            mainList['credentials'] = credentials
+            toCreateList = {}
+            valueList = {}
+            i = 0
+            for value in listValues:
+                del value['id'] 
+                valueList[i] = value
+                i += 1
+
+            toCreateList['to_create'] = valueList
+            mainList[typeName] = toCreateList   
+
+            stream = yaml.dump(mainList, default_flow_style = False, default_style='')
+            outputFile.write(stream.replace('- ', '  '))
+            outputFile.close()
+
     def dump_tasks(self, config_file_name_output):
-        outputFile = open(config_file_name_output, 'w')
-        tasks = self.get_all_tasks(self.ask_for_credentials())
-        for task in tasks:
-            outputFile.write(str(task))
-        # print(self.get_all_tasks(self.ask_for_credentials()))
+        if not self._quiet:
+            print("Dumping rsync tasks to", config_file_name_output)
+        credentials = self.ask_for_credentials()
+        self.dump(config_file_name_output, credentials, self.get_all_tasks(credentials), Type.rsync_tasks.name)
 
     def dump_users(self, config_file_name_output):
-        print(self.get_all_users(self.ask_for_credentials()))
+        if not self._quiet:
+            print("Dumping users to", config_file_name_output)
+        credentials = self.ask_for_credentials()
+        self.dump(config_file_name_output, credentials, self.get_all_non_builtin_users(credentials), Type.users.name)
 
     def dump_groups(self, config_file_name_output):
-        print(self.get_all_groups(self.ask_for_credentials()))
+        if not self._quiet:
+            print("Dumping groups to", config_file_name_output)
+        credentials = self.ask_for_credentials()
+        self.dump(config_file_name_output, credentials, self.get_all_non_builtin_groups(credentials), Type.groups.name)
+
+    def dump_tasks(self, config_file_name_output):
+        if not self._quiet:
+            print("Dumping time machines to", config_file_name_output)
+        credentials = self.ask_for_credentials()
+        self.dump(config_file_name_output, credentials, self.get_all_time_machines(credentials), Type.time_machine.name)
 
     def process_config_file(self):
         if not self._quiet:
@@ -171,20 +212,23 @@ class FreeNASManager(object):
         if not self._quiet:
             print("Getting credentials ...")
 
-        stream_file = open(os.path.join(os.path.dirname(__file__), self._config_file_name), 'r')
-        stream = yaml.load(stream_file)
-        stream_file.close()
+        if os.path.isfile(self._config_file_name):
+            stream_file = open(os.path.join(os.path.dirname(__file__), self._config_file_name), 'r')
+            stream = yaml.load(stream_file)
+            stream_file.close()
 
-        # Check for password, if empty -> prompt user
-        try:
-            password = stream['credentials']['password']
-        except Exception:
-            stream['credentials']['password'] = getpass.getpass('Enter the password for '+stream['credentials']['username']+':')    
-            password = stream['credentials']['password']
+            # Check for password, if empty -> prompt user
+            try:
+                password = stream['credentials']['password']
+            except Exception:
+                stream['credentials']['password'] = getpass.getpass('Enter the password for '+stream['credentials']['username']+':')    
+                password = stream['credentials']['password']
 
-        credentials = stream['credentials']
-        
-        return stream['credentials']
+            credentials = stream['credentials']
+            
+            return stream['credentials']
+        else:
+            return self.ask_for_credentials()
 
     def determine_type(self):
         if not self._quiet:
@@ -217,6 +261,16 @@ class FreeNASManager(object):
             if stream[Type.groups.name]:
                 self._type = Type.groups
                 self._base_address = self._base_address+'%s' % self._group_address
+                if not self._quiet:
+                    print("Type is", self._type)
+                return True
+        except Exception:
+            pass
+
+        try:
+            if stream[Type.time_machine.name]:
+                self._type = Type.time_machine
+                self._base_address = self._base_address+'%s' % self._time_machine_address
                 if not self._quiet:
                     print("Type is", self._type)
                 return True
@@ -258,6 +312,17 @@ class FreeNASManager(object):
 
             for i in range(len(current_groups)):
                 my_id = current_groups[i]['id']
+                self.delete(credentials, my_id)
+
+    def delete_all_time_machines(self, credentials):
+        self._base_address = 'http://%s/api/v1.0%s' % (self._hostname, self._time_machine_address)
+        self._type = Type.time_machine
+        if input("Are you sure you want to delete all time machines? y/[n]: ") is 'y':
+            if not self._quiet:
+                print("Deleting all time machines ...")
+            current_time_machines = self.get_all_time_machines(credentials)
+            for i in range(len(current_time_machines)):
+                my_id = current_time_machines[i]['id']
                 self.delete(credentials, my_id)
 
     def get_all_tasks(self, credentials):
@@ -315,6 +380,15 @@ class FreeNASManager(object):
                 t.append(i)
         return t
 
+    def get_all_time_machines(self, credentials):
+        return json.loads(requests.get(
+            'http://%s/api/v1.0%s/' % (self._hostname, self._time_machine_address),
+            auth=(credentials['username'], credentials['password']),
+            headers={'Content-Type': 'application/json'},
+            verify=False,
+            data=''
+            ).text)
+
 # config = the name of the config file (yaml), quiet
 def main(argv):
     parser = argparse.ArgumentParser()
@@ -324,28 +398,30 @@ def main(argv):
     parser.add_argument('-c', '--create', required=False, type=str)
     parser.add_argument('-up', '--update', required=False, type=str)
     parser.add_argument('-d', '--delete', required=False, type=str)
+
     parser.add_argument('-dat','--delete_all_tasks', required=False, type=str)
     parser.add_argument('-dau','--delete_all_users', required=False, type=str)
     parser.add_argument('-dag','--delete_all_groups', required=False, type=str)
+    parser.add_argument('-datm','--delete_all_time_machines', required=False, type=str)
+
     parser.add_argument('-diat','--display_tasks', required=False, type=str)
     parser.add_argument('-diau','--display_users', required=False, type=str)
     parser.add_argument('-diag','--display_groups', required=False, type=str)
+    parser.add_argument('-diatm','--display_time_machines', required=False, type=str)
+
     parser.add_argument('-gat','--get_all_tasks', required=False, type=str)
     parser.add_argument('-gau','--get_all_users', required=False, type=str)
     parser.add_argument('-gag','--get_all_groups', required=False, type=str)
+    parser.add_argument('-gatm','--get_all_time_machines', required=False, type=str)
     parser.add_argument('-gaubi','--get_all_users_built_in', required=False, type=str)
     parser.add_argument('-gagbi','--get_all_groups_built_in', required=False, type=str)
-    parser.add_argument('-user','--username', required=False, type=str)
-    parser.add_argument('-pass','--password', required=False, type=str)
 
     args = parser.parse_args(sys.argv[1:])
 
     hostname = args.hostname
-    # hostname = '192.168.0.46'
     config_file_name = args.config
     quiet, create, update, delete = False, True, False, False
 
-    # Add three booleans and test for create, update and delete, if they aren't there default to false
     if args.quiet is None:
         quiet = False
     elif args.quiet is 't' or args.quiet is 'true':
@@ -368,23 +444,25 @@ def main(argv):
 
     # Create a manager to process the config file
     manager =  FreeNASManager(hostname,config_file_name, quiet, create, update, delete)
-    if args.delete_all_tasks or args.delete_all_users or args.delete_all_groups:
+    if args.delete_all_tasks or args.delete_all_users or args.delete_all_groups or args.delete_all_time_machines:
         if args.delete_all_tasks is 't':
-            # Get real credentials from the file before doing this (or prompt for credentials?)
             manager.delete_all_tasks(manager.get_credentials()) 
         if args.delete_all_groups is 't':
-            # Get real credentials from the file before doing this (or prompt for credentials?)
             manager.delete_all_groups(manager.get_credentials()) 
         if args.delete_all_users is 't':
             manager.delete_all_users(manager.get_credentials()) 
-    elif args.display_tasks or args.display_users or args.display_groups:
+        if args.delete_all_time_machines is 't':
+            manager.delete_all_time_machines(manager.get_credentials())        
+    elif args.display_tasks or args.display_users or args.display_groups or args.display_time_machines:
         if args.display_tasks is 't':
             print("Rsync Tasks:\n",manager.get_all_tasks(manager.get_credentials()))    
         if args.display_users is 't':
             print("Users:\n",manager.get_all_non_builtin_users(manager.get_credentials()))
         if args.display_groups is 't':
             print("Groups:\n",manager.get_all_non_builtin_groups(manager.get_credentials()))
-    elif args.get_all_tasks or args.get_all_users or args.get_all_groups:
+        if args.display_time_machines is 't':
+            print("Time machines:\n", manager.get_all_time_machines(manager.get_credentials()))
+    elif args.get_all_tasks or args.get_all_users or args.get_all_groups or args.get_all_time_machines:
         if args.config is not None:
             if args.get_all_tasks is 't':
                 manager.dump_tasks(args.config)
@@ -392,6 +470,8 @@ def main(argv):
                 manager.dump_users(args.config)
             if args.get_all_groups is 't':
                 manager.dump_groups(args.config)
+            if args.get_all_time_machines is 't':
+                manager.dump_time_machines(args.config)
     else:
         manager.display_configuration()
         if create or update or delete:

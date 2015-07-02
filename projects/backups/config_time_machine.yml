@@ -1,0 +1,48 @@
+# --- !Sample yaml file for testing
+credentials:
+  username:  'root'
+  password:  'admin'
+time_machine:
+    to_create:
+      0:
+        afp_name: 'TimeMachineShare1'
+        afp_path: '/mnt/Disk'
+        afp_timemachine:  true
+        # The following are advanced options set to default values. Only change if you know what you're doing :)
+        afp_comment:  ''
+        afp_fperm:  '644'
+        afp_dperm:  '755'
+        afp_allow:  ''
+        afp_deny:  ''
+        afp_rw:  ''
+        afp_ro:  ''
+        afp_sharepw:  ''
+        afp_umask:  '000'
+        afp_upriv:  true
+        afp_nostat:  false
+        afp_nodev:  false
+      1:
+        afp_name: 'TimeMachineShare2'
+        afp_path: '/mnt/Disk'
+        afp_timemachine:  true
+        # The following are advanced options set to default values. Only change if you know what you're doing :)
+        afp_comment:  ''
+        afp_fperm:  '644'
+        afp_dperm:  '755'
+        afp_allow:  ''
+        afp_deny:  ''
+        afp_rw:  ''
+        afp_ro:  ''
+        afp_sharepw:  ''
+        afp_umask:  '000'
+        afp_upriv:  true
+        afp_nostat:  false
+        afp_nodev:  false
+    to_update: 
+      0:
+        id:  1  
+        afp_name: 'TimeMachineShare1Updated'
+    to_delete:
+      0:
+        id:  2
+
