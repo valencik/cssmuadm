@@ -4,6 +4,9 @@
 apt-get update
 apt-get --assume-yes upgrade
 
+#Set local time to Halifax
+timedatectl set-timezone America/Halifax
+
 #Install Apache2, PHP5, MySQL if they do not exist
 MYSQL_ROOT_PASS="mySecretPassword"
 if [ ! -f /etc/apache2/apache2.conf ];
