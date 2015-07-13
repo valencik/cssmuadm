@@ -84,7 +84,7 @@ then
     echo "Moodle site already enabled in Apache2"
   else
     cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/Moodle.conf
-    sed -i '/<VirtualHost \*:80>/,/<\/VirtualHost>/s/DocumentRoot \/var\/www\/html/DocumentRoot \/var\/www\/moodle/' \ 
+    sed -i '/<VirtualHost \*:80>/,/<\/VirtualHost>/s/DocumentRoot \/var\/www\/html/DocumentRoot \/var\/www\/moodle/' \
     /etc/apache2/sites-available/Moodle.conf
     rm /etc/apache2/sites-enabled/000-default.conf
     ln -s /etc/apache2/sites-available/Moodle.conf /etc/apache2/sites-enabled/Moodle.conf
