@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/env/bash -e
 #This script installs required software for hosting a Moodle server
 
 apt-get update
