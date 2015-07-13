@@ -36,7 +36,7 @@ fi
 #Install PHP extensions and drivers require by Moodle
 apt-get --assume-yes --quiet install php5-mysql
 apt-get --assume-yes --quiet install curl libcurl3 libcurl3-dev php5-curl
-apt-get --assume-yes --quiet install php5-gd
+apt-get --assume-yes --quiet install php5-gd php5-intl php5-xmlrpc
 
 #Install aspell and grahviz (Moodle needs their path info)
 apt-get --assume-yes --quiet install aspell
@@ -52,7 +52,7 @@ then
 
   mkdir -p /var/www/moodle
   #Clone the latest commit on the stable branch only
-  git clone --depth=1 -b MOODLE_27_STABLE --single-branch git://git.moodle.org/moodle.git /var/www/moodle
+  git clone --depth=1 -b MOODLE_29_STABLE --single-branch git://git.moodle.org/moodle.git /var/www/moodle
   
   #Create Moodle Data
   mkdir -p /srv/moodledata
