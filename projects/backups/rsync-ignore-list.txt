@@ -1,0 +1,99 @@
+### Root Directory Contents
+/dev
+/proc
+/sys
+/run
+/mnt
+/media
+/lost+found
+/tmp
+
+
+### Home Directory Contents
+# Based on https://gist.github.com/rubo77/8ffaadbc58ab099d2bc3
+
+.ICEauthority
+.Private # contains the actual encrypted home directory
+.Trash
+.Xauthority
+.aptitude
+.cache
+.cddb # cached info about audio CDs
+.compiz # no settings here; processes
+.dbus # session-specific
+.elegant-gnome-backup
+.esd_auth
+.fontconfig
+.gconfd
+.gksu.lock
+.gnome2_private
+.gvfs
+.local/share/Trash
+.local/share/Trash/
+.local/share/gvfs-metadata
+.pulse
+.pulse*
+.pulse-cookie
+.recently-used
+.recently-used.xbel
+.thumbnails
+.xsession-errors
+
+#Dropbox
+Dropbox/
+.dropbox
+.dropbox-dist
+
+#Firefox-specific (see also Profile folder):
+.mozilla/firefox/*/Cache
+# in case Fx crashes dumps will be stored in this
+.mozilla/firefox/*/minidumps
+# session-specific 
+.mozilla/firefox/*/.parentlock
+# phishing database, recreated
+.mozilla/firefox/*/urlclassifier3.sqlite
+# blacklisted extensions
+.mozilla/firefox/*/blocklist.xml
+# extension database, recreated on startup
+.mozilla/firefox/*/extensions.sqlite
+.mozilla/firefox/*/extensions.sqlite-journal
+.mozilla/firefox/*/extensions.rdf
+.mozilla/firefox/*/extensions.ini
+.mozilla/firefox/*/extensions.cache
+# cached UI data, recreated
+.mozilla/firefox/*/XUL.mfasl
+.mozilla/firefox/*/XPC.mfasl
+.mozilla/firefox/*/xpti.dat
+.mozilla/firefox/*/compreg.dat
+
+#Opera-specific
+.opera/temporary_downloads
+.opera/cache
+.opera/thumbnails
+.opera/opcache
+.opera/icons
+.opera/application_cache
+.opera/widgets/*/cache
+.opera/lock
+
+#GnuPG:
+.gnupg/rnd
+.gnupg/random_seed
+.gnupg/.#*
+.gnupg/*.lock
+.gnupg/gpg-agent-info-*
+
+#Google Chrome:
+.config/google-chrome/Default/Local Storage
+.config/google-chrome/Default/Session Storage
+.config/google-chrome/Default/Application Cache
+.config/google-chrome/Default/History Index *
+
+#Other apps:
+.pulse/icons # Pidgin
+.java/deployment/cache # Cached applets
+.icedteaplugin
+.icedtea
+.gnome2/epiphany/favicon_cache
+.adobe
+.macromedia
