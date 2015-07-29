@@ -40,6 +40,19 @@ then
   done
 else
   echo "Found existing $courseShortName.usrpasswd file."
+  while IFS=: read -r user pass;
+  do
+    #Ensure users exist and passwords match file
+    if id -u $user >/dev/null 2>&1; then
+      echo "User $user already exists. Continuing will update password."
+      read -p "Press [Enter] key to continue or Ctrl+C to cancel..."
+      echo "$user:$pass" | chpasswd 
+    else
+      #Create users in /home/course/$courseShortName with ./$courseShortName-skel contents
+      useradd --base-dir $path --create-home --skel ./courseShortName-skel \
+              --shell /bin/bash --password $(openssl passwd $pass) $user  
+    fi
+  done < "$courseShortName.usrpasswd"
 fi
 
 #Give special accounts ownership of student accounts
