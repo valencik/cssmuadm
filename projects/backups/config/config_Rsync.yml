@@ -1,0 +1,30 @@
+Rsync:
+  to_create:
+    0:
+      rsync_archive: true
+      rsync_compress: false
+      rsync_daymonth: '*'
+      rsync_dayweek: '*'
+      rsync_delayupdates: false
+      rsync_delete: false
+      rsync_desc: ''
+      rsync_direction: push
+      rsync_enabled: true
+      rsync_extra: ''
+      rsync_hour: '*'
+      rsync_minute: '*'
+      rsync_mode: module
+      rsync_month: '*'
+      rsync_path: /mnt/Disk
+      rsync_preserveattr: false
+      rsync_preserveperm: false
+      rsync_quiet: false
+      rsync_recursive: false
+      rsync_remotehost: cs.smu.ca
+      rsync_remotemodule: UpdatedTaskName
+      rsync_remotepath: ''
+      rsync_remoteport: 22
+      rsync_times: true
+      rsync_user: root
+  to_update:
+  to_delete:

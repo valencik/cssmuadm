@@ -1,0 +1,17 @@
+Users:
+    to_create:
+      0:
+        bsdusr_username: "testUser1"
+        bsdusr_password: "password"
+        bsdusr_full_name: "User"
+        bsdusr_creategroup: true
+        bsdusr_uid: 1111
+        bsdusr_group: 1
+        bsdusr_mode: ""
+        bsdusr_shell: "/bin/sh"
+        bsdusr_password_disabled: false
+        bsdusr_locked: false
+        bsdusr_sudo: false
+        bsdusr_sshpubkey: ""
+    to_update:
+    to_delete:

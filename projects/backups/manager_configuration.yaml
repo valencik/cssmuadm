@@ -1,0 +1,14 @@
+hostname: 140.184.193.158
+credentials:
+    username:  'root'
+    password:  'admin'
+
+include_password: false
+dump_all:  true
+dump_non_builtin:   true
+auto_create_volumes:  true 
+
+permission_create:  true
+permission_update:  true
+permission_delete:  true
+

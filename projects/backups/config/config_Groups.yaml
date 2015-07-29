@@ -1,0 +1,7 @@
+Groups:
+  to_create:
+    0:
+      id: 2001
+      bsdgrp_gid:  2001
+      bsdgrp_group: "TestGroup1"
+      bsdgrp_sudo: false
