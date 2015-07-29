@@ -1,8 +1,11 @@
-#!/bin/bash
+#!/usr/env/bash -e
 #This script installs required software for hosting a Moodle server
 
 apt-get update
 apt-get --assume-yes upgrade
+
+#Set local time to Halifax
+timedatectl set-timezone America/Halifax
 
 #Install Apache2, PHP5, MySQL if they do not exist
 MYSQL_ROOT_PASS="mySecretPassword"
