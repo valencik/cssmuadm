@@ -43,7 +43,7 @@ If correct, write your changes to disk with `w`
 Confirm the partition exists with `fdisk -l /dev/sdX`  
 
 
-## Extend the Logical Volume
+## Extend the Volume Group
 
 Our goal is to extend the size of a particular lvm logical volume (root).  
 In order to do so we need to have the space available on a lvm physical volume that is part of the
@@ -60,11 +60,34 @@ Extend the existing lvm volume group that your logical volume is on with the new
 vgextend ubuntu-vg /dev/sdX1
 ```
 
+## Option 1: Extend the Logical Volume
 Extend the desired lvm logical volume
 ```
 lvextend /dev/ubuntu-vg/root /dev/sdb1
 ```
 
+## Option 2: Remove Old Physical Volumes
+
+If we want to simplify the number of images connected to the VM we can replace old physical volumes with one new larger one.
+In order to do this we must relocate physical extents.
+
+```
+pvmove /dev/sda1
+```
+
+Once a physical volume has zero allocated physical extents we can remove it from the volume group.
+
+```
+vgreduce ubuntu-vg /dev/sda1
+```
+
+And once removed from the volume group we can remove it as a physical volume.
+
+```
+pvremove /dev/sda1
+```
+
+At this stage the image is no longer a part of the guest LVM system and can be unmounted.
 
 ## Resize the filesystem
 
