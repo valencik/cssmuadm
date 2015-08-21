@@ -34,7 +34,7 @@ then
         echo "$user:$pass" | chpasswd 
       else
         #Create users in /home/course/$courseShortName with ./$courseShortName-skel contents
-        useradd --base-dir $path --create-home --skel ./courseShortName-skel \
+        useradd --base-dir $path --create-home --skel ./$courseShortName-skel \
                 --shell /bin/bash --password $(openssl passwd $pass) $user  
       fi
   done
@@ -49,7 +49,7 @@ else
       echo "$user:$pass" | chpasswd 
     else
       #Create users in /home/course/$courseShortName with ./$courseShortName-skel contents
-      useradd --base-dir $path --create-home --skel ./courseShortName-skel \
+      useradd --base-dir $path --create-home --skel ./$courseShortName-skel \
               --shell /bin/bash --password $(openssl passwd $pass) $user  
     fi
   done < "$courseShortName.usrpasswd"
