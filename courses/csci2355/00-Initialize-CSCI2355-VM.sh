@@ -40,9 +40,6 @@ then
   echo "mysql-server mysql-server/root_password password $MYSQL_ROOT_PASS" | debconf-set-selections
   echo "mysql-server mysql-server/root_password_again password $MYSQL_ROOT_PASS" | debconf-set-selections
   
-  #MySQL: Make sure loopback device has IP (needed for mysql install)
-  ip addr add 127.0.0.1 dev lo
-  
   apt-get --assume-yes install mysql-server
 fi
 
