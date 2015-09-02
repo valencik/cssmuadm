@@ -5,9 +5,7 @@ apt-get update
 apt-get --assume-yes upgrade
 
 #Install basic tools
-apt-get --assume-yes --quiet install git vim ethtool iperf
-apt-get --assume-yes --quiet install p7zip-full
-apt-get --assume-yes --quiet install aspell
+apt-get --assume-yes --quiet install git vim ethtool iperf p7zip-full aspell ispell finger
 
 MYSQL_ROOT_PASS="mySecretPassword"
 PHPMYADMIN_DIR="secretPHPmyadmin"      #Secure phpmyadmin default install
