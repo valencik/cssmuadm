@@ -76,3 +76,8 @@ for i in $(seq -w 00 50); do
   user=$courseShortName$i
   usermod -aG $courseShortName $user
 done
+
+#Create 355bashrc file
+cp csc35500-skel/.355bashrc $path/csc35500/.355bashrc
+chown csc35500:csc355 $path/csc35500/.355bashrc
+chmod 750 $path/csc35500/.355bashrc
