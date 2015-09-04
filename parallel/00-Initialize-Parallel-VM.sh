@@ -1,4 +1,6 @@
-#!/bin/bash
+#!/usr/bin/env bash
+set -e
+
 #This script is testing installation and setup on Ubuntu 14
 
 #Set hostname

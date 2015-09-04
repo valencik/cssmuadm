@@ -1,4 +1,6 @@
-#!/bin/bash -e
+#!/usr/bin/env bash
+set -e
+
 # This script adds a mongo role to the users in the provided usr.passwd file
 # If the role does not already exist in the admin database, you must create it
 # mongo admin -p -u siteUserAdmin create-studentAdminActions-role.js

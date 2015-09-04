@@ -1,4 +1,6 @@
-#!/bin/bash
+#!/usr/bin/env bash
+set -e
+
 #This script installs required software for hosting the main CS server.
 
 DATE=`date +%Y-%m-%d`

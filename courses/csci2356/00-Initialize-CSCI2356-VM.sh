@@ -1,4 +1,6 @@
-#!/bin/bash
+#!/usr/bin/env bash
+set -e
+
 #This script installs required software for hosting the CSCI2356 course.
 
 #Set hostname

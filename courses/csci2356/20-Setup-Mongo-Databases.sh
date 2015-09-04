@@ -1,4 +1,6 @@
-#!/bin/bash -e
+#!/usr/bin/env bash
+set -e
+
 # This script creates mongo users and enables mongod authentication
 
 #Check usage

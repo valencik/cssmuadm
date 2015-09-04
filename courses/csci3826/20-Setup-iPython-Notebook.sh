@@ -1,4 +1,6 @@
-#! /bin/bash
+#!/usr/bin/env bash
+set -e
+
 #This script sets up ipython notebook profiles and certs for users
 #It requires a $courseShortName.usrpasswd file exist in current directory
 

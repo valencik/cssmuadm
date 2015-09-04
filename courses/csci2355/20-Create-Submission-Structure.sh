@@ -1,4 +1,6 @@
-#! /bin/bash
+#!/usr/bin/env bash
+set -e
+
 #This script rebuilds the user submission structure and ensure proper permissions
 #It requires a $courseShortName.usrpasswd file exist in current directory
 

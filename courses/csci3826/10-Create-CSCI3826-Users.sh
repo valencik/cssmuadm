@@ -1,4 +1,6 @@
-#! /bin/bash
+#!/usr/bin/env bash
+set -e
+
 #Create all necessary user accounts for csci3826
 
 #Configuration

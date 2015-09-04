@@ -1,4 +1,6 @@
-#!/bin/bash
+#!/usr/bin/env bash
+set -e
+
 #This script installs required software for hosting the CSCI2355 course.
 
 apt-get update

@@ -1,4 +1,6 @@
-#!/bin/bash -e
+#!/usr/bin/env bash
+set -e
+
 #This script adds an htaccess and htpasswd file to user directories
 
 #Check usage
