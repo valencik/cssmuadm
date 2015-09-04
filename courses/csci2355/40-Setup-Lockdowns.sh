@@ -12,7 +12,7 @@ maxAccount=49
 instructor=$courseShortName"00"
 marker=$courseShortName"50"
 numberSubmissions=12
-lockdownSchedule=$path/lockdown/lockdownSchedule2014
+lockdownSchedule=$path/lockdown/lockdownSchedule
 
 #TODO echo configuration data
 
