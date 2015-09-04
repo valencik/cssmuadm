@@ -18,8 +18,9 @@ lockdownSchedule=$path/lockdown/lockdownSchedule
 
 #Copy lockdown scripts to course lockdown folder
 mkdir -p $path/lockdown
-#cp ./lockdown.sh $path/lockdown/
-#cp ./lockdownSchedule* $path/lockdown/
+cp lockdown/lockdown.sh $path/lockdown/
+cp lockdown/lockdownSchedule $lockdownSchedule
+chown $instructor:$instructor $path/lockdown/*
 
 #Ensure lockdown cronjob exists
 crontab -u $instructor -l | grep -F \
