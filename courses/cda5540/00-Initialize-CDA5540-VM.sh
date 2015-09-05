@@ -20,8 +20,15 @@ apt-get --assume-yes upgrade
 apt-get --assume-yes --quiet install git vim ethtool iperf p7zip-full aspell ispell finger software-properties-common graphviz
 
 #Install Oracle Java 8
-apt-add-repository --yes ppa:webupd8team/java
-apt-get update
+if [ -f /etc/apt/sources.list.d/webupd8team-java-trusty.list ];
+then
+  echo "Webupd8 PPA already installed"
+else
+  echo "Adding Webupd8 Toolchain PPA"
+  apt-add-repository --yes ppa:webupd8team/java
+  apt-get update
+fi
+echo "oracle-java8-installer  shared/accepted-oracle-license-v1-1     boolean true" | debconf-set-selections
 apt-get install --assume-yes --quiet oracle-java8-installer
 
 #Install gcc5 and others
