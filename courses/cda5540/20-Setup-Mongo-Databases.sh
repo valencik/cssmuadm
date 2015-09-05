@@ -3,6 +3,7 @@ set -e
 
 # This script creates mongo users and enables mongod authentication
 mongoAdminPass=mySecretMongoAdminPassword
+mongoAdminUser=cssmuadm
 
 #Check usage
 if [ $# -ne 1 ]; then
@@ -21,7 +22,7 @@ fi
 
 # Create mongo user siteUserAdmin
 echo "db = db.getSiblingDB('admin')" >> mongo-users.js
-echo "db.createUser( { user: \"siteUserAdmin\", pwd: \"$mongoAdminPass\", roles: [ { role: \"userAdminAnyDatabase\", db: \"admin\" } ] })" >> mongo-users.js
+echo "db.createUser( { user: \"$mongoAdminUser\", pwd: \"$mongoAdminPass\", roles: [ { role: \"userAdminAnyDatabase\", db: \"admin\" } ] })" >> mongo-users.js
 
 # Generate the mongo-user.js file
 while IFS=: read -r user pass;
