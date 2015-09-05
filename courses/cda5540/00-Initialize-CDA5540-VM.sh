@@ -53,31 +53,11 @@ else
   sudo python get-pip.py 
   rm get-pip.py
 fi
+pip install --quiet pymongo
 pip list >> pip.list.$DATE.log
 
-#Install python packages
-# install dependencies for scipy and numpy
-apt-get install -y libblas-dev liblapack-dev libevent-dev python-dev
-
-# install dependencies for matplotlib
-apt-get install -y libfreetype6-dev libpng-dev libxft-dev
-
-# install scientific packages
-pip install --quiet numpy
-pip install --quiet sympy
-pip install --quiet matplotlib
-pip install --quiet scipy
-pip install --quiet pandas
-
-# install ipython notebook and dependencies
-pip install --quiet ipython
-pip install --quiet pyzmq
-pip install --quiet jinja2
-pip install --quiet pygments
-pip install --quiet bokeh
-
-# install other python libraries
-pip install --quiet pymongo
+#Install dependencies for scipy, numpy, and matplotlib
+apt-get install --assume-yes --quiet libblas-dev liblapack-dev libevent-dev python-dev libfreetype6-dev libpng-dev libxft-dev
 
 
 #Install Apache2, PHP5, MySQL if they do not exist
