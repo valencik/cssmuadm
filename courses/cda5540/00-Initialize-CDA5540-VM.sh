@@ -20,9 +20,9 @@ apt-get --assume-yes upgrade
 apt-get --assume-yes --quiet install git vim ethtool iperf p7zip-full aspell ispell finger software-properties-common graphviz
 
 #Install Oracle Java 8
-apt-add-repository ppa:webupd8team/java
+apt-add-repository --yes ppa:webupd8team/java
 apt-get update
-apt-get install oracle-java8-installer
+apt-get install --assume-yes --quiet oracle-java8-installer
 
 #Install gcc5 and others
 if [ -f /etc/apt/sources.list.d/ubuntu-toolchain-r-test-trusty.list ];
