@@ -77,6 +77,7 @@ for i in $(seq -w $minAccount $maxAccount); do
     #Protect htpasswd from user changes
     chmod -R 550 $path/$user/htpasswd
     chown -R www-data:$user $path/$user/htpasswd
+    chmod 570 $path/$user/htpasswd
 
 done
 
