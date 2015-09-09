@@ -36,8 +36,8 @@ fi
 apt-get install --assume-yes --quiet x2goserver x2goserver-xsession
 
 #Install XFCE4
-apt-get --assume-yes --quiet install xfce4 xfce4-goodies \
-  xubuntu-artwork xubuntu-default-settings xubuntu-icon-theme
+apt-get --assume-yes --quiet install xfce4* \
+  xubuntu-artwork xubuntu-default-settings xubuntu-icon-theme geany
 
 #Restart server
 echo "Restarting server..."
