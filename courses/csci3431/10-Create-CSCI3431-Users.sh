@@ -8,7 +8,7 @@ mkdir -p $path
 minAccount=00
 maxAccount=50
 instructor="tami"
-marker=$courseShortName"50"
+marker="marker"
 numberSubmissions=10
 
 
@@ -55,11 +55,13 @@ else
 fi
 
 #Give special accounts ownership of student accounts
-for i in $(seq -w 01 49); do
-  user=$courseShortName$i
-  usermod -aG $user $marker
-  usermod -aG $user $instructor
-done
+while IFS=: read -r user pass;
+do
+  if [ "$user" != "$instructor" ] &&  [ "$user" != "$marker" ]; then
+    usermod -aG $user $marker
+    usermod -aG $user $instructor
+  fi
+done < "$courseShortName.usrpasswd"
 
 #Create admin group, this is used for locking files down
 groupadd $courseShortName"admin"
@@ -69,10 +71,12 @@ usermod -aG $courseShortName"admin" $marker
 #Create common group, used for securing webpages from public
 #Lets each user create dir (chmod 710) with file (chmod 770) for php to write
 groupadd $courseShortName
-for i in $(seq -w 00 50); do
-  user=$courseShortName$i
-  usermod -aG $courseShortName $user
-done
+while IFS=: read -r user pass;
+do
+  if [ "$user" != "$instructor" ] &&  [ "$user" != "$marker" ]; then
+    usermod -aG $courseShortName $user
+  fi
+done < "$courseShortName.usrpasswd"
 
 #Create osbashrc file
 cp os00-skel/.osbashrc $path/$instructor/.osbashrc
