@@ -9,6 +9,9 @@ apt-get --assume-yes upgrade
 #Install basic tools
 apt-get --assume-yes --quiet install git vim ethtool iperf p7zip-full aspell ispell finger
 
+#Install vsftp for HTML-kit
+apt-get --assume-yes --quiet install vsftpd
+
 MYSQL_ROOT_PASS="mySecretPassword"
 PHPMYADMIN_DIR="secretPHPmyadmin"      #Secure phpmyadmin default install
 
