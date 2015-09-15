@@ -10,7 +10,18 @@ apt-get --assume-yes upgrade
 apt-get --assume-yes --quiet install git vim ethtool iperf p7zip-full aspell ispell finger
 
 #Install vsftp for HTML-kit
-apt-get --assume-yes --quiet install vsftpd
+if [ ! -f /etc/vsftpd.conf ];
+then
+  apt-get --assume-yes install vsftpd
+
+  #Enable write access and user mask
+  cp /etc/vsftpd.conf /etc/vsftpd.conf_old
+  sed -i '/^#write_enable=YES/s/^#//' /etc/vsftpd.conf
+  sed -i '/^#local_umask=022/s/^#//' /etc/vsftpd.conf
+
+  #Restart the sftp server
+  service vsftpd restart
+fi
 
 MYSQL_ROOT_PASS="mySecretPassword"
 PHPMYADMIN_DIR="secretPHPmyadmin"      #Secure phpmyadmin default install
