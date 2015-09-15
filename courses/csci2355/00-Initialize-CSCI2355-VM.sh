@@ -26,6 +26,7 @@ then
   #Enable necessary apache2 mods for per-user directories
   a2enmod php5
   a2enmod userdir 
+  a2enmod include
 
   #Enable php access in user directories
   cp /etc/apache2/mods-enabled/php5.conf /etc/apache2/mods-enabled/php5.conf_old
