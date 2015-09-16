@@ -63,6 +63,8 @@ for i in $(seq -w 01 49); do
   usermod -aG $user $marker
   usermod -aG $user $instructor
 done
+usermod -aG www-data $instructor
+usermod -aG www-data $marker
 
 #Create admin group, this is used for locking files down
 groupadd $courseShortName"admin"
