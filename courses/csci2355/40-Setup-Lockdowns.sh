@@ -21,6 +21,7 @@ mkdir -p $path/lockdown
 cp lockdown/lockdown.sh $path/lockdown/
 cp lockdown/lockdownSchedule $lockdownSchedule
 chown $instructor:$instructor $path/lockdown/*
+chmod +x $path/lockdown/lockdown.sh
 
 #Ensure lockdown cronjob exists
 crontab -u $instructor -l | grep -F \
