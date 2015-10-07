@@ -1,18 +1,15 @@
 #!/usr/bin/env bash
 set -e
 
-#Create all necessary user accounts for csci2355
-
 #Configuration
-courseShortName=csc355
+courseShortName=os
 path=/home/course/$courseShortName
 mkdir -p $path
 minAccount=00
 maxAccount=50
-instructor=$courseShortName"00"
-marker=$courseShortName"50"
+instructor="tami"
+marker="marker"
 numberSubmissions=10
-#TODO echo configuration data
 
 
 #Generate username/password file for usrpasswd command
@@ -58,13 +55,13 @@ else
 fi
 
 #Give special accounts ownership of student accounts
-for i in $(seq -w 01 49); do
-  user=$courseShortName$i
-  usermod -aG $user $marker
-  usermod -aG $user $instructor
-done
-usermod -aG www-data $instructor
-usermod -aG www-data $marker
+while IFS=: read -r user pass;
+do
+  if [ "$user" != "$instructor" ] &&  [ "$user" != "$marker" ]; then
+    usermod -aG $user $marker
+    usermod -aG $user $instructor
+  fi
+done < "$courseShortName.usrpasswd"
 
 #Create admin group, this is used for locking files down
 groupadd $courseShortName"admin"
@@ -74,12 +71,14 @@ usermod -aG $courseShortName"admin" $marker
 #Create common group, used for securing webpages from public
 #Lets each user create dir (chmod 710) with file (chmod 770) for php to write
 groupadd $courseShortName
-for i in $(seq -w 00 50); do
-  user=$courseShortName$i
-  usermod -aG $courseShortName $user
-done
+while IFS=: read -r user pass;
+do
+  if [ "$user" != "$instructor" ] &&  [ "$user" != "$marker" ]; then
+    usermod -aG $courseShortName $user
+  fi
+done < "$courseShortName.usrpasswd"
 
-#Create 355bashrc file
-cp csc35500-skel/.355bashrc $path/csc35500/.355bashrc
-chown csc35500:csc355 $path/csc35500/.355bashrc
-chmod 750 $path/csc35500/.355bashrc
+#Create osbashrc file
+cp os00-skel/.osbashrc $path/$instructor/.osbashrc
+chown $instructor:os $path/$instructor/.osbashrc
+chmod 750 $path/$instructor/.osbashrc
