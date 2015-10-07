@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-set -e
 
 #This script creates the cron job to lockdown student submission files.
 #It requires a $courseShortName.usrpasswd file exist in current directory
