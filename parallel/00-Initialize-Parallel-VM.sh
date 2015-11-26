@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-#This script is testing installation and setup on Ubuntu 14
+#This script should setup a Ubuntu 14.04 VM for numeric computing research for Paul Muir
 
 #Set hostname
 NEW_HOSTNAME=paulR
@@ -13,9 +13,11 @@ apt-get update
 apt-get --assume-yes upgrade
 
 #Install basic tools
-apt-get --assume-yes --quiet install git vim ethtool iperf
-apt-get --assume-yes --quiet install p7zip-full
-apt-get --assume-yes --quiet install aspell
+apt-get --assume-yes --quiet install git vim ethtool iperf p7zip-full aspell zsh
 
-apt-get --assume-yes --quiet install parallel
+#Install GNU Parallel and other build tools
+apt-get --assume-yes --quiet install build-essential gfortran parallel texlive texlive-font-utils graphviz
 
+#Install python3 requirements
+apt-get --assume-yes --quiet install python3-notebook python3-matplotlib python3-numpy python3-pip
+sudo pip3 install gprof2dot
