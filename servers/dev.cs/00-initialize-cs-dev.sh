@@ -20,9 +20,13 @@ source tasks/change-hostname.sh
 source tasks/change-vg-name.sh
 
 #Create users
-mkdir /home/faculty
+if [ ! -d /home/faculty ]; then
+  mkdir /home/faculty
+fi
 newusers servers/dev.cs/faculty.usrpasswd
-mkdir /home/student
+if [ ! -d /home/student ]; then
+  mkdir /home/student
+fi
 newusers servers/dev.cs/student.usrpasswd
 
 #Create SQL databases
