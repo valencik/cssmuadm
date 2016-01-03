@@ -1,9 +1,6 @@
 #!/usr/bin/env bash
 set -e
 
-#Load configuration file
-source config.env
-
 #Install Apache2, PHP5, MySQL if they do not exist
 if [ ! -f /etc/apache2/apache2.conf ];
 then
