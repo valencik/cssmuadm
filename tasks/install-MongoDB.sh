@@ -13,5 +13,5 @@ then
   echo "deb http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list
   apt-get update
   apt-get --assume-yes --quiet install mongodb-org
-  service mongod start
+  service mongod restart
 fi
