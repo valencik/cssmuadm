@@ -19,7 +19,7 @@ then
 
   #Custom user directories specified in userdir.conf
   cp /etc/apache2/mods-available/userdir.conf /etc/apache2/mods-available/userdir.conf_old
-  cp LAMP/userdir.conf /etc/apache2/mods-available/userdir.conf
+  cp tasks/LAMP/userdir.conf /etc/apache2/mods-available/userdir.conf
   service apache2 restart
 
   #Install MySQL with preconfigured password
