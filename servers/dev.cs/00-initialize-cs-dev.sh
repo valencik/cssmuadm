@@ -26,5 +26,5 @@ mkdir /home/student
 newusers servers/dev.cs/student.usrpasswd
 
 #Create SQL databases
-bash tasks/LAMP/add-SQL-users.sh servers/dev.cs/faculty.usrpasswd
-bash tasks/LAMP/add-SQL-users.sh servers/dev.cs/student.usrpasswd
+source tasks/LAMP/add-SQL-users.sh servers/dev.cs/faculty.usrpasswd
+source tasks/LAMP/add-SQL-users.sh servers/dev.cs/student.usrpasswd
