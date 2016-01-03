@@ -20,12 +20,9 @@ then
   cp /etc/apache2/mods-enabled/php5.conf /etc/apache2/mods-enabled/php5.conf_old
   sed -i '/<IfModule mod_userdir.c>/,/<\/IfModule>/s/^/#/' /etc/apache2/mods-enabled/php5.conf
 
-  #User directories are in /home/course/cda540/
-  cp /etc/apache2/mods-enabled/userdir.conf /etc/apache2/mods-enabled/userdir.conf_old
-  sed -i '/<Directory \/home\/\*\/public_html>/s/home/home\/course\/cda540/' \
-      /etc/apache2/mods-enabled/userdir.conf
-  sed -i '/<Directory \/home\/course\/cda540\/\*\/public_html>/,/<\/Directory>/s/SymLinksIfOwnerMatch/FollowSymLinks/' \
-      /etc/apache2/mods-enabled/userdir.conf
+  #Custom user directories specified in userdir.conf
+  cp /etc/apache2/mods-available/userdir.conf /etc/apache2/mods-available/userdir.conf_old
+  cp LAMP/userdir.conf /etc/apache2/mods-available/userdir.conf
   service apache2 restart
 
   #Install MySQL with preconfigured password
