@@ -1,9 +1,6 @@
 #!/usr/bin/env bash
 set -e
 
-#Load configuration file
-source config.env
-
 #Check usage
 if [ $# -ne 2 ]; then
   echo "ERROR: This script requires two user:password files as parameters."

@@ -1,9 +1,6 @@
 #!/usr/bin/env bash
 set -e
 
-#Load configuration file
-source config.env
-
 #Check usage
 if [ $# -ne 1 ]; then
   echo "ERROR: This script requires a user:password file as a parameter."
