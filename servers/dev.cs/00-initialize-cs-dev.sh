@@ -32,3 +32,6 @@ newusers servers/dev.cs/student.usrpasswd
 #Create SQL databases
 source tasks/LAMP/add-SQL-users.sh servers/dev.cs/faculty.usrpasswd
 source tasks/LAMP/add-SQL-users.sh servers/dev.cs/student.usrpasswd
+
+#Grant faculty permissions on student DBs
+source tasks/LAMP/grant-faculty-SQL-privileges.sh servers/dev.cs/faculty.usrpasswd servers/dev.cs/student.usrpasswd

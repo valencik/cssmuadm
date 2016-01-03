@@ -25,10 +25,10 @@ else
 fi
 
 #Loop over faculty
-while IFS=: read -r faculty_user faculty_pass;
+while IFS=: read -r faculty_user other;
 do
   #Loop over students
-  while IFS=: read -r student_user student_pass;
+  while IFS=: read -r student_user other;
   do
   
     mysql --user="root" --password="$MYSQL_ROOT_PASS" \
