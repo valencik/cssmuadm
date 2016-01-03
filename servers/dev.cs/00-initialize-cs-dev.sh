@@ -19,3 +19,6 @@ source tasks/install-gcc.sh
 source tasks/change-hostname.sh
 source tasks/change-vg-name.sh
 
+#Create users
+mkdir /home/faculty
+newusers servers/dev.cs/faculty.usrpasswd
