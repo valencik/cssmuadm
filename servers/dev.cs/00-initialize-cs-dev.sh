@@ -13,11 +13,12 @@ if [ ! -d /home/student ]; then
 fi
 
 #usrpasswd file handling
+sort student.usrpasswd | uniq > uniq_student.usrpasswd
+mv uniq_student.usrpasswd student.usrpasswd
 cat student.usrpasswd faculty.usrpasswd > full.usrpasswd
-sort < student.usrpasswd | uniq > student.usrpasswd #remove duplicates
 
 #Create users
-newusers servers/dev.cs/full.usrpasswd
+newusers full.usrpasswd
 
 #Get and apply any updates
 apt-get update
