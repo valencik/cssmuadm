@@ -4,14 +4,19 @@ set -e
 #Load configuration file
 source config.env
 
-#Create users
+#Create home folders
 if [ ! -d /home/faculty ]; then
   mkdir /home/faculty
 fi
 if [ ! -d /home/student ]; then
   mkdir /home/student
 fi
+
+#usrpasswd file handling
 cat student.usrpasswd faculty.usrpasswd > full.usrpasswd
+sort < student.usrpasswd | uniq > student.usrpasswd #remove duplicates
+
+#Create users
 newusers servers/dev.cs/full.usrpasswd
 
 #Get and apply any updates
