@@ -17,7 +17,6 @@ source tasks/install-MongoDB.sh
 source tasks/install-Java8.sh
 source tasks/install-gcc.sh
 source tasks/change-hostname.sh
-source tasks/change-vg-name.sh
 
 #Create users
 if [ ! -d /home/faculty ]; then
@@ -35,3 +34,7 @@ source tasks/LAMP/add-SQL-users.sh servers/dev.cs/student.usrpasswd
 
 #Grant faculty permissions on student DBs
 source tasks/LAMP/grant-faculty-SQL-privileges.sh servers/dev.cs/faculty.usrpasswd servers/dev.cs/student.usrpasswd
+
+#Change VG name and restart
+source tasks/change-vg-name.sh
+shutdown -r now
