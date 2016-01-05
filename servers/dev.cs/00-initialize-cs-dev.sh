@@ -33,6 +33,11 @@ source tasks/install-NodeJS.sh
 source tasks/install-MongoDB.sh
 source tasks/install-Java8.sh
 source tasks/install-gcc.sh
+
+#Install R
+apt-get --assume-yes --quiet install r-recommended
+
+#Change the server hostname to config.env value
 source tasks/change-hostname.sh
 
 #Create SQL databases
