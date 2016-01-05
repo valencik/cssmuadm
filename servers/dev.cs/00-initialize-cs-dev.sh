@@ -35,6 +35,7 @@ source tasks/install-Java8.sh
 source tasks/install-gcc.sh
 
 #Install R
+apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9
 apt-get --assume-yes --quiet install r-recommended
 
 #Change the server hostname to config.env value
