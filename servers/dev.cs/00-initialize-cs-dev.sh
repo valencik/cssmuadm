@@ -29,6 +29,7 @@ cd ../../
 
 #Tasks
 source tasks/install-LAMP.sh
+source tasks/install-NodeJS.sh
 source tasks/install-MongoDB.sh
 source tasks/install-Java8.sh
 source tasks/install-gcc.sh
