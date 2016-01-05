@@ -17,7 +17,7 @@ else
 fi
 
 #Loop over names and passwords
-while IFS=: read -r user pass;
+while IFS=: read -r user pass other;
 do
 
   #Create databases and set privileges for all users
