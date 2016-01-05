@@ -4,6 +4,16 @@ set -e
 #Load configuration file
 source config.env
 
+#Create users
+if [ ! -d /home/faculty ]; then
+  mkdir /home/faculty
+fi
+if [ ! -d /home/student ]; then
+  mkdir /home/student
+fi
+cat student.usrpasswd faculty.usrpasswd > full.usrpasswd
+newusers servers/dev.cs/full.usrpasswd
+
 #Get and apply any updates
 apt-get update
 apt-get --assume-yes upgrade
@@ -17,16 +27,6 @@ source tasks/install-MongoDB.sh
 source tasks/install-Java8.sh
 source tasks/install-gcc.sh
 source tasks/change-hostname.sh
-
-#Create users
-if [ ! -d /home/faculty ]; then
-  mkdir /home/faculty
-fi
-newusers servers/dev.cs/faculty.usrpasswd
-if [ ! -d /home/student ]; then
-  mkdir /home/student
-fi
-newusers servers/dev.cs/student.usrpasswd
 
 #Create SQL databases
 source tasks/LAMP/add-SQL-users.sh servers/dev.cs/faculty.usrpasswd
