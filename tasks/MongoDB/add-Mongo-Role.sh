@@ -22,13 +22,12 @@ fi
 
 # Confirm the role with the user
 echo "Going to add role $2 to all users in $1?"
-read -p "Press [Enter] key to continue or Ctrl+C to cancel..."
 
 # Generate the mongo-user.js file
 while IFS=: read -r user pass;
 do
-  echo "db = db.getSiblingDB('$user')" >> mongo-user-roles.js
-  echo "db.grantRolesToUser( \"$user\", [ { role: \"$2\", db: \"admin\" } ])" >> mongo-user-roles.js
+  echo "db = db.getSiblingDB('$user')" >> tasks/MongoDB/mongo-user-roles.js
+  echo "db.grantRolesToUser( \"$user\", [ { role: \"$2\", db: \"admin\" } ])" >> tasks/MongoDB/mongo-user-roles.js
 done < "$usrpasswdfile"
 
 # Print out instructions
