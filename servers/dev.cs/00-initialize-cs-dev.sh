@@ -26,6 +26,7 @@ while IFS=: read -r pw_name pw_passwd pw_uid pw_gid pw_gecos pw_dir pw_shell;
 do
   if [ -d "$pw_dir" ]; then
     cp -r /etc/skel/. "$pw_dir"
+    chown -R "$pw_name":"$pw_name" "$pw_dir"
   fi
 done < full.usrpasswd
 
