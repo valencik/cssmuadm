@@ -25,7 +25,7 @@ mkdir /etc/skel/public_html
 while IFS=: read -r pw_name pw_passwd pw_uid pw_gid pw_gecos pw_dir pw_shell;
 do
   if [ -d "$pw_dir" ]; then
-    cp /etc/skel/. "$pw_dir"
+    cp -r /etc/skel/. "$pw_dir"
   fi
 done < full.usrpasswd
 
