@@ -48,6 +48,9 @@ source tasks/LAMP/add-SQL-users.sh servers/dev.cs/student.usrpasswd
 #Grant faculty permissions on student DBs
 source tasks/LAMP/grant-faculty-SQL-privileges.sh servers/dev.cs/faculty.usrpasswd servers/dev.cs/student.usrpasswd
 
+#Create MongoDB users and add role
+source tasks/MongoDB/create-MongoDB-users.sh servers/dev.cs/full.usrpasswd
+
 #Change VG name and restart
 source tasks/change-vg-name.sh
 shutdown -r now
