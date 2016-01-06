@@ -18,9 +18,9 @@ for i in $(seq -w 01 $number); do
   mysql --user="root" --password="$MYSQL_ROOT_PASS" \
     --execute="CREATE DATABASE IF NOT EXISTS $database DEFAULT CHARACTER SET UTF8 COLLATE utf8_unicode_ci;"
   mysql --user="root" --password="$MYSQL_ROOT_PASS" \
-    --execute="GRANT ALL privileges ON $database TO $user@localhost;"
+    --execute="GRANT ALL privileges ON $database.* TO $user@localhost;"
   mysql --user="root" --password="$MYSQL_ROOT_PASS" \
-    --execute="GRANT GRANT OPTION ON $database TO $user@localhost;"
+    --execute="GRANT GRANT OPTION ON $database.* TO $user@localhost;"
 done
 
 # Flush MySQL privileges to update changes
