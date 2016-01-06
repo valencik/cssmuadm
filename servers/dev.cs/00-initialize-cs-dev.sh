@@ -53,6 +53,7 @@ source tasks/change-hostname.sh
 #Create SQL databases
 source tasks/LAMP/add-SQL-users.sh servers/dev.cs/faculty.usrpasswd
 source tasks/LAMP/add-SQL-users.sh servers/dev.cs/student.usrpasswd
+source tasks/LAMP/create-dataset-db.sh pawan dataset 10
 
 #Grant faculty permissions on student DBs
 source tasks/LAMP/grant-faculty-SQL-privileges.sh servers/dev.cs/faculty.usrpasswd servers/dev.cs/student.usrpasswd
