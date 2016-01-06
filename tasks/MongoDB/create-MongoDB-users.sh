@@ -36,7 +36,7 @@ mongo admin tasks/MongoDB/mongo-users.js
 mongo admin tasks/MongoDB/create-studentAdminActions-role.js
 
 # Add users to StudentAdminActions role
-source tasks/MongoDB/add-Mongo-Role.sh $usrpasswdfile tasks/MongoDB/studentAdminActions
+source tasks/MongoDB/add-Mongo-Role.sh $usrpasswdfile studentAdminActions
 mongo admin tasks/MongoDB/mongo-user-roles.js
 
 # Enable mongo authentication
