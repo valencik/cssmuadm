@@ -2,7 +2,7 @@
 set -e
 
 #Check usage
-if [ $# -ne 1]; then
+if [ $# -ne 1 ]; then
   echo "ERROR: This script requires a user:password file."
   echo "USAGE: ./$0 student.usrpasswd"
   exit
@@ -25,8 +25,8 @@ do
     echo "$pw_name:$pw_passwd" | chpasswd 
   else
     #Create users in $path
-    useradd --home $pw_dir --create-home --skel /etc/skel \
-            --shell $pw_shell --password $(openssl passwd $pass) $user  
+    useradd --home-dir $pw_dir --create-home --skel /etc/skel \
+            --shell $pw_shell --password $(openssl passwd $pw_passwd) $pw_name
     fullname=$(echo "$pw_gecos" | sed s/,//g)
     chfn -f "$fullname" $pw_name
   fi
